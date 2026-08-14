@@ -19,4 +19,4 @@ When changing `SKILL.md`, keep the frontmatter trigger description accurate, kee
 
 Explain the user-visible behavior, compatibility impact, and verification performed. Keep changes scoped. A pull request that changes the HyperFrames, TTS, privacy, or filesystem boundary must include a negative test for the failure mode it prevents.
 
-By submitting a contribution, you license it under Apache License 2.0.
+By submitting a contribution, you license it under the MIT License.

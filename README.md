@@ -26,22 +26,47 @@ The Python scripts otherwise use only the standard library.
 
 ## Installation
 
-This Skill is currently installed from source. The `npx` command below installs the
-HyperFrames dependency; it does not install `material-to-video` itself.
+### Install with the Skills CLI
 
-First install or update the HyperFrames skill pack:
+Install `material-to-video` into the current project:
+
+```bash
+npx --yes skills add lincotalk/linco-skills@material-to-video -y
+```
+
+On Windows PowerShell, use `npx.cmd` when script execution policy blocks `npx.ps1`:
+
+```powershell
+npx.cmd --yes skills add lincotalk/linco-skills@material-to-video -y
+```
+
+Project installation places the Skill under `.agents/skills/material-to-video` so it
+travels with that project. Add `-g` for a user-level installation available across
+projects:
+
+```bash
+npx --yes skills add lincotalk/linco-skills@material-to-video -g -y
+```
+
+Install or update the HyperFrames skill pack required for composition and rendering:
 
 ```bash
 npx hyperframes@latest skills
 ```
 
-Then clone this repository and copy `material-to-video` into the Codex skills directory.
+Reload Codex after installation so the new Skill is discovered.
+
+### Install from source
+
+Clone the repository, optionally check out a release tag, then copy
+`material-to-video` into the Codex skills directory.
 
 PowerShell:
 
 ```powershell
 git clone https://github.com/lincotalk/linco-skills.git
 Set-Location .\linco-skills
+# Optional: git checkout v0.1.0
 
 $codexRoot = if ($env:CODEX_HOME) { $env:CODEX_HOME } else { Join-Path $HOME ".codex" }
 New-Item -ItemType Directory -Force (Join-Path $codexRoot "skills") | Out-Null
@@ -55,16 +80,17 @@ Bash:
 ```bash
 git clone https://github.com/lincotalk/linco-skills.git
 cd linco-skills
+# Optional: git checkout v0.1.0
 
 mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
 mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills/material-to-video"
 cp -R ./material-to-video/. "${CODEX_HOME:-$HOME/.codex}/skills/material-to-video"
 ```
 
-Confirm that `<skills-directory>/material-to-video/SKILL.md` exists, then restart or
-reload Codex so the skill metadata is discovered. To update later, run `git pull` in the
-cloned repository and repeat the copy command. HyperFrames scaffolds each generated
-project with a pinned CLI version, keeping later preview and render commands reproducible.
+Confirm that `<skills-directory>/material-to-video/SKILL.md` exists, then reload Codex.
+To update a source installation later, run `git pull` in the cloned repository and repeat
+the copy command. HyperFrames scaffolds each generated project with a pinned CLI version,
+keeping later preview and render commands reproducible.
 
 ## Usage
 
@@ -140,8 +166,8 @@ Local material is read only from paths selected by the user. The workflow does n
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). By contributing, you agree that your contribution is licensed under Apache License 2.0.
+See [CONTRIBUTING.md](CONTRIBUTING.md). By contributing, you agree that your contribution is licensed under the MIT License.
 
 ## License
 
-Copyright 2026 Linco. Licensed under the [Apache License 2.0](LICENSE).
+Copyright 2026 Linco. Licensed under the [MIT License](LICENSE).
