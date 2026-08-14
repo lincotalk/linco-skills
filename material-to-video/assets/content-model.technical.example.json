@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 3,
+  "intakeMode": "topic-research",
+  "editorialMode": "technical-single-point",
+  "sourceMode": "editorial-recut",
+  "centralThesis": {
+    "text": "Tool discovery gives an Agent a callable schema, but it does not grant execution permission.",
+    "sourceIds": ["r-example-source"]
+  },
+  "audienceValue": {
+    "viewerNeed": "Understand one concrete Agent runtime behavior rather than memorize an architecture diagram.",
+    "promisedTakeaway": "Recognize the exact state change from no registered tool to a schema-valid call, and its permission boundary."
+  },
+  "technicalContract": {
+    "propositionId": "C01",
+    "mechanism": {
+      "inputState": "The runtime has no registered tool schema.",
+      "transformation": "A discovery response supplies the tool name, description, and input schema, which the runtime registers.",
+      "outputState": "The model can construct a schema-valid call, while the permission gate still controls execution.",
+      "relationshipId": "R01"
+    },
+    "proofObjects": [
+      {
+        "id": "P01",
+        "kind": "json",
+        "authenticity": "source-derived",
+        "description": "A source-supported discovery response containing name, description, and inputSchema.",
+        "contentIds": ["C01", "R01"],
+        "sourceIds": ["r-example-source"]
+      }
+    ],
+    "boundaryContentIds": ["L01"]
+  },
+  "claims": [
+    {
+      "id": "C01",
+      "text": "Tool discovery changes the runtime from having no callable schema to having one registered schema.",
+      "importance": "core",
+      "sourceIds": ["r-example-source"]
+    }
+  ],
+  "definitions": [
+    {
+      "id": "D01",
+      "term": "inputSchema",
+      "explanation": "The structured argument contract used to construct and validate a tool call.",
+      "sourceIds": ["r-example-source"]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "R01",
+      "from": "Discovery response",
+      "relation": "registers",
+      "to": "Callable tool schema",
+      "explanation": "The runtime registers returned metadata before the model constructs a valid call.",
+      "sourceIds": ["r-example-source"]
+    }
+  ],
+  "examples": [],
+  "limitations": [
+    {
+      "id": "L01",
+      "text": "Discovery and schema validity do not bypass runtime permission checks.",
+      "sourceIds": ["r-example-source"]
+    }
+  ]
+}

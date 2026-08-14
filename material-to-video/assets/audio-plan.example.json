@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "editorialMode": "technical-single-point",
+  "narration": {
+    "priority": "primary",
+    "duckingDb": -8
+  },
+  "music": {
+    "mode": "none",
+    "provenanceId": null
+  },
+  "eventCues": [
+    {
+      "id": "SFX01",
+      "sceneId": "S02",
+      "atSec": 3.2,
+      "event": "schema-registered",
+      "source": "synthesized",
+      "provenanceId": null,
+      "purpose": "Make the registration state change audible without masking narration."
+    },
+    {
+      "id": "SFX02",
+      "sceneId": "S04",
+      "atSec": 2.1,
+      "event": "permission-blocked",
+      "source": "synthesized",
+      "provenanceId": null,
+      "purpose": "Mark the execution boundary with a dry low-frequency interruption."
+    }
+  ],
+  "bridges": [
+    {
+      "id": "AB01",
+      "fromSceneId": "S01",
+      "toSceneId": "S02",
+      "type": "j-cut",
+      "offsetSec": 0.18,
+      "purpose": "Let the discovery request lead the camera into the runtime."
+    },
+    {
+      "id": "AB02",
+      "fromSceneId": "S02",
+      "toSceneId": "S03",
+      "type": "l-cut",
+      "offsetSec": 0.2,
+      "purpose": "Carry the registration confirmation into the valid-call state."
+    },
+    {
+      "id": "AB03",
+      "fromSceneId": "S03",
+      "toSceneId": "S04",
+      "type": "silence-cut",
+      "offsetSec": 0.12,
+      "purpose": "Create a clear interruption before the permission boundary."
+    }
+  ],
+  "intentionalSilences": [
+    {
+      "sceneId": "S04",
+      "atSec": 1.95,
+      "durationSec": 0.25,
+      "purpose": "Expose the permission rejection as the final technical boundary."
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 2,
+  "intakeMode": "topic-research",
+  "editorialMode": "general-explainer",
+  "sourceMode": "editorial-recut",
+  "centralThesis": {
+    "text": "State the single research-supported thesis the video will explain.",
+    "sourceIds": ["r-example-source"]
+  },
+  "audienceValue": {
+    "viewerNeed": "Understand the researched topic without reading every source.",
+    "promisedTakeaway": "Know the core idea, how it works, and its main limitation."
+  },
+  "claims": [
+    {
+      "id": "C01",
+      "text": "One atomic, research-supported claim.",
+      "importance": "core",
+      "sourceIds": ["r-example-source"]
+    }
+  ],
+  "definitions": [
+    {
+      "id": "D01",
+      "term": "Example term",
+      "explanation": "A concise definition supported by the selected source.",
+      "sourceIds": ["r-example-source"]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "R01",
+      "from": "Input",
+      "relation": "is transformed into",
+      "to": "Output",
+      "explanation": "Explain the supported sequence, dependency, or comparison.",
+      "sourceIds": ["r-example-source"]
+    }
+  ],
+  "examples": [
+    {
+      "id": "E01",
+      "text": "A concrete example that clarifies a claim.",
+      "sourceIds": ["r-example-source"]
+    }
+  ],
+  "limitations": [
+    {
+      "id": "L01",
+      "text": "A condition, caveat, uncertainty, or research cutoff.",
+      "sourceIds": ["r-example-source"]
+    }
+  ]
+}

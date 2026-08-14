@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "containmentTolerancePx": 1,
+  "checks": [
+    {
+      "sceneId": "S01",
+      "phase": "entrance",
+      "atSec": 0.4,
+      "screenshot": "S01-entrance.png",
+      "checkedContainerIds": ["thesis-block"],
+      "fontResult": {
+        "primaryFamily": "Microsoft YaHei",
+        "loaded": true,
+        "fallbackMismatch": false
+      },
+      "blankFrame": false,
+      "safeAreaOk": true,
+      "captionOverlap": false,
+      "clippedText": false,
+      "violations": []
+    }
+  ],
+  "technicalReview": {
+    "singlePropositionOk": true,
+    "proofReadable": true,
+    "proofAuthenticityClear": true,
+    "stateChainComplete": true,
+    "semanticColorsConsistent": true,
+    "boundaryVisible": true,
+    "mutedComprehensionOk": true,
+    "audioOnlyContinuityOk": true
+  },
+  "transitionChecks": [
+    {
+      "fromSceneId": "S01",
+      "toSceneId": "S02",
+      "midpointScreenshot": "S01-to-S02-midpoint.png",
+      "continuityType": "continuous",
+      "audioBridge": "j-cut",
+      "anchorOrBreakOk": true,
+      "semanticColorOk": true,
+      "readableAtMidpoint": true
+    }
+  ]
+}

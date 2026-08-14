@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "platform": "xiaohongshu",
+  "specRevision": "2026-08-production-v1",
+  "verificationMode": "preset-fallback",
+  "verificationNote": "No current uploader requirement was supplied; using the versioned production preset.",
+  "videoCanvas": {
+    "width": 1080,
+    "height": 1920,
+    "ratio": "9:16"
+  },
+  "title": "The concrete subject and viewer value",
+  "contentIds": ["C01"],
+  "titleLineCount": 2,
+  "fontFamily": "Microsoft YaHei",
+  "compositionMode": "authored",
+  "variants": [
+    {
+      "id": "xiaohongshu-primary",
+      "width": 1080,
+      "height": 1440,
+      "ratio": "3:4",
+      "output": "final/cover-xiaohongshu-1080x1440.png",
+      "criticalArea": {
+        "x": 60,
+        "y": 60,
+        "width": 960,
+        "height": 1320
+      }
+    }
+  ],
+  "displayPreviews": []
+}

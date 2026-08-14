@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "intakeMode": "topic-research",
+  "topic": "State the user-provided topic.",
+  "researchQuestion": "State the focused question the video will answer.",
+  "researchedAt": "2026-08-06T00:00:00Z",
+  "researchCutoff": "2026-08-06",
+  "sources": [
+    {
+      "id": "r-example-source",
+      "url": "https://example.com/official-source",
+      "title": "Exact source title",
+      "publisher": "Source publisher",
+      "sourceType": "official",
+      "publishedAt": null,
+      "accessedAt": "2026-08-06T00:00:00Z",
+      "selection": "selected",
+      "evidence": [
+        {
+          "id": "EV01",
+          "kind": "paraphrase",
+          "text": "A narrow, faithful statement supported by the opened source.",
+          "locator": "Section heading, page number, timestamp, or table name"
+        }
+      ],
+      "visualUse": {
+        "status": "not-cleared",
+        "basis": "No reusable media license was verified."
+      }
+    },
+    {
+      "id": "r-example-cross-check",
+      "url": "https://example.org/independent-source",
+      "title": "Exact independent source title",
+      "publisher": "Independent publisher",
+      "sourceType": "analysis",
+      "publishedAt": null,
+      "accessedAt": "2026-08-06T00:05:00Z",
+      "selection": "supporting",
+      "evidence": [
+        {
+          "id": "EV01",
+          "kind": "paraphrase",
+          "text": "A narrow statement that independently checks or contextualizes the main source.",
+          "locator": "Section heading, page number, timestamp, or table name"
+        }
+      ],
+      "visualUse": {
+        "status": "not-cleared",
+        "basis": "No reusable media license was verified."
+      }
+    }
+  ],
+  "conflicts": []
+}

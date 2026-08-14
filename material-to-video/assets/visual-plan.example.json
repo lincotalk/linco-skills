@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 3,
+  "editorialMode": "general-explainer",
+  "sourceMode": "editorial-recut",
+  "designRead": "Reading this as: a useful technology explainer for mobile viewers, using an authored editorial system, with sources as traceable evidence rather than page templates.",
+  "audienceThesis": "The viewer should understand the core idea, its mechanism, and the main condition without reading the source cards.",
+  "visualWorld": "A clean editorial workspace where concepts become labeled structures and evidence appears only when it proves a point.",
+  "typography": "One highly legible CJK sans family establishes hierarchy through weight and size; ordinary Latin text and numbers remain in the same family.",
+  "fontPolicy": {
+    "primaryCjkFamily": "Microsoft YaHei",
+    "source": "verified-system",
+    "assetPath": null,
+    "fallbackFamilies": ["Noto Sans CJK SC", "sans-serif"],
+    "ordinaryTextUsesPrimary": true,
+    "monospaceScopes": ["code", "terminal", "aligned-data"]
+  },
+  "colorLogic": "Neutral light background, near-black reading text, green for supported flow, blue for evidence, and red only for limitations.",
+  "graphicLanguage": "Rules, nodes, brackets, and bounded evidence windows with consistent 4px line weight.",
+  "motionGrammar": "Ideas assemble spatially, relationships connect directionally, and evidence snaps into the relevant authored structure.",
+  "openingFrame": "The topic name and central thesis are visible immediately, supported by one recognizable subject cue.",
+  "dials": {
+    "designVariance": 6,
+    "motionIntensity": 5,
+    "visualDensity": 5
+  },
+  "motionThesis": "Scattered source facts resolve into one understandable system, then the limiting condition constrains it.",
+  "focalSceneId": "S02",
+  "scenes": [
+    {
+      "id": "S01",
+      "startSec": 0.0,
+      "endSec": 6.0,
+      "viewerQuestion": "What is this about, and what is the central point?",
+      "cognitiveJob": "Name the subject and establish the thesis.",
+      "dominantTakeaway": "The topic can be understood as one clear transformation.",
+      "contentIds": ["C01"],
+      "sourceIds": ["m-0123456789abcdef-01234567"],
+      "layoutFamily": "kinetic-type",
+      "transitionIn": "cut",
+      "sourceDensity": "low",
+      "evidenceTreatment": "authored-typography",
+      "primaryReadingSurface": "authored",
+      "minPrimaryTextPx": 54,
+      "captionMaxLines": 2,
+      "minCaptionTextPx": 40,
+      "containment": {
+        "mode": "strict",
+        "containerIds": ["thesis-block"],
+        "intentionalOverflowIds": []
+      },
+      "reviewMoments": [
+        { "phase": "entrance", "atSec": 0.4 },
+        { "phase": "development", "atSec": 1.8 },
+        { "phase": "hold", "atSec": 4.4 },
+        { "phase": "exit", "atSec": 5.8 }
+      ],
+      "beats": [
+        { "atSec": 0.0, "durationSec": 2.8, "kind": "establish", "actor": "thesis", "purpose": "Name the subject", "motion": "bounded mask reveal" },
+        { "atSec": 3.0, "durationSec": 3.0, "kind": "readable-hold", "actor": "thesis", "purpose": "Let the central point register", "motion": "stable hold with one emphasis change" }
+      ]
+    },
+    {
+      "id": "S02",
+      "startSec": 6.0,
+      "endSec": 12.0,
+      "viewerQuestion": "How do the parts relate?",
+      "cognitiveJob": "Explain the supported mechanism as a spatial relationship.",
+      "dominantTakeaway": "The input, transformation, and output have distinct roles.",
+      "contentIds": ["R01", "D01"],
+      "sourceIds": ["m-0123456789abcdef-01234567"],
+      "layoutFamily": "authored-diagram",
+      "transitionIn": "match-cut",
+      "sourceDensity": "medium",
+      "evidenceTreatment": "authored-diagram-with-selective-evidence",
+      "primaryReadingSurface": "authored",
+      "minPrimaryTextPx": 36,
+      "captionMaxLines": 2,
+      "minCaptionTextPx": 40,
+      "containment": {
+        "mode": "strict",
+        "containerIds": ["system-diagram", "evidence-window"],
+        "intentionalOverflowIds": []
+      },
+      "reviewMoments": [
+        { "phase": "entrance", "atSec": 0.4 },
+        { "phase": "development", "atSec": 2.6 },
+        { "phase": "hold", "atSec": 5.2 },
+        { "phase": "exit", "atSec": 5.8 }
+      ],
+      "beats": [
+        { "atSec": 0.0, "durationSec": 1.8, "kind": "establish", "actor": "system-nodes", "purpose": "Establish the parts", "motion": "ordered node reveal" },
+        { "atSec": 2.0, "durationSec": 2.8, "kind": "transform", "actor": "system-flow", "purpose": "Show the supported relationship", "motion": "directional connection and state change" },
+        { "atSec": 5.0, "durationSec": 1.0, "kind": "focus", "actor": "evidence-window", "purpose": "Prove the relationship with source context", "motion": "bounded evidence snap-in" }
+      ]
+    },
+    {
+      "id": "S03",
+      "startSec": 12.0,
+      "endSec": 18.0,
+      "viewerQuestion": "What should I remember, including the boundary?",
+      "cognitiveJob": "Resolve the explanation into a usable summary and condition.",
+      "dominantTakeaway": "The idea is useful only within the stated limitation.",
+      "contentIds": ["C01", "L01"],
+      "sourceIds": ["m-0123456789abcdef-01234567"],
+      "layoutFamily": "recap",
+      "transitionIn": "wipe",
+      "sourceDensity": "low",
+      "evidenceTreatment": "authored-summary",
+      "primaryReadingSurface": "authored",
+      "minPrimaryTextPx": 40,
+      "captionMaxLines": 2,
+      "minCaptionTextPx": 40,
+      "containment": {
+        "mode": "strict",
+        "containerIds": ["summary-block", "limitation-block"],
+        "intentionalOverflowIds": []
+      },
+      "reviewMoments": [
+        { "phase": "entrance", "atSec": 0.4 },
+        { "phase": "development", "atSec": 2.2 },
+        { "phase": "hold", "atSec": 4.5 },
+        { "phase": "exit", "atSec": 5.8 }
+      ],
+      "beats": [
+        { "atSec": 0.0, "durationSec": 2.8, "kind": "recap", "actor": "summary", "purpose": "Resolve the explanation", "motion": "ordered synthesis" },
+        { "atSec": 3.0, "durationSec": 3.0, "kind": "readable-hold", "actor": "limitation", "purpose": "Hold the boundary", "motion": "stable final state" }
+      ]
+    }
+  ]
+}

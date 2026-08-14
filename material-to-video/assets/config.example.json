@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 3,
+  "video": {
+    "platform": null,
+    "intakeMode": null,
+    "aspectRatio": "9:16",
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "coverageStrategy": "summary",
+    "sourceMode": "editorial-recut",
+    "durationMode": "auto",
+    "voiceover": true,
+    "captions": true,
+    "backgroundMusic": "none"
+  },
+  "editorial": {
+    "audience": "ai-technology",
+    "narrationStyle": "objective-explainer",
+    "editorialMode": "general-explainer"
+  },
+  "visualQuality": {
+    "longVideoSeconds": 45,
+    "minLayoutFamiliesLongVideo": 3,
+    "maxConsecutiveLayoutFamily": 2,
+    "maxConsecutiveTransition": 2,
+    "maxSubjectGapSeconds": 4.0,
+    "denseFullCardMaxSeconds": 6.0,
+    "maxCaptionLines": 2,
+    "minPrimaryTextPx": 34,
+    "minCaptionTextPx": 40,
+    "containmentTolerancePx": 1
+  },
+  "cover": {
+    "specRevision": "2026-08-production-v1",
+    "maxTitleLines": 3,
+    "minSafeMarginPx": 60,
+    "platformVariants": {
+      "douyin": [
+        {
+          "id": "douyin-vertical",
+          "width": 1080,
+          "height": 1440,
+          "ratio": "3:4",
+          "output": "final/cover-douyin-vertical-1080x1440.png"
+        },
+        {
+          "id": "douyin-horizontal",
+          "width": 1440,
+          "height": 1080,
+          "ratio": "4:3",
+          "output": "final/cover-douyin-horizontal-1440x1080.png"
+        }
+      ],
+      "xiaohongshu": [
+        {
+          "id": "xiaohongshu-primary",
+          "width": 1080,
+          "height": 1440,
+          "ratio": "3:4",
+          "output": "final/cover-xiaohongshu-1080x1440.png"
+        }
+      ],
+      "wechat-channels": [
+        {
+          "id": "wechat-channels-vertical-master",
+          "width": 1080,
+          "height": 1920,
+          "ratio": "9:16",
+          "output": "final/cover-wechat-channels-vertical-1080x1920.png"
+        }
+      ]
+    },
+    "platformPreviews": {
+      "douyin": [],
+      "xiaohongshu": [],
+      "wechat-channels": [
+        {
+          "id": "wechat-channels-feed-6x7",
+          "sourceVariantId": "wechat-channels-vertical-master",
+          "width": 1080,
+          "height": 1260,
+          "ratio": "6:7",
+          "output": "review/cover-wechat-channels-feed-1080x1260.png"
+        }
+      ]
+    }
+  },
+  "tts": {
+    "provider": "voxcpm-gradio",
+    "endpoint": null,
+    "endpointEnv": "VOXCPM_TTS_URL",
+    "authTokenEnv": "VOXCPM_TTS_TOKEN",
+    "apiName": "/generate",
+    "defaultVoicePreset": "female",
+    "voicePresets": {
+      "female": {
+        "profileId": "ai-tech-female-calm-natural-v2",
+        "controlInstruction": "年轻成年女性，使用自然、平稳的标准普通话，像在安静环境中向朋友介绍熟悉的工具。音色中性柔和，情绪稳定，整体唤醒度低，语速中等偏慢；重音克制但随语义变化，停顿长短跟随句意，句尾自然收住，不固定上扬。英文技术名词、缩写和数字发音清楚准确。避免幼态童声、甜腻夹子音、过度气声、鼻音、撒娇感、播音腔、广告腔、客服腔、夸张自媒体腔、人工笑意、固定音高、等间隔停顿、逐句同调、连续重读、过度咬字和明显 AI 合成节奏。",
+        "referenceSampleText": "大模型并不是在数据库里寻找固定答案。它会根据上下文预测接下来最可能出现的内容，这也是理解生成式 AI 的第一步。",
+        "seedValue": 20260803
+      },
+      "male": {
+        "profileId": "ai-tech-male-blogger-natural-v1",
+        "controlInstruction": "25到40岁的中国男性科技创作者，使用标准普通话，以日常、平稳、自然的说话状态讲解 AI 知识。音色中性偏暖，音高正常，情绪稳定，整体唤醒度偏低，语速中等；重音适度且随语义变化，停顿长短跟随句意，句尾自然收住，不固定上扬。像真实的人在向同事分享熟悉的技术内容。避免明显笑意、抬高音量、连续重读、促销式句尾、表演感、播音腔、广告腔、夸张自媒体表达、固定音高、等间隔停顿、逐句同调、过度咬字和明显 AI 合成节奏。",
+        "referenceSampleText": "大模型并不是在数据库里寻找固定答案。它会根据上下文预测接下来最可能出现的内容，这也是理解生成式 AI 的第一步。",
+        "seedValue": 20260817
+      }
+    },
+    "speaker": {
+      "mode": "voice-design",
+      "preset": "female",
+      "profileId": null,
+      "referenceAudio": null,
+      "referenceAudioSha256": null,
+      "referenceText": null,
+      "referenceTextSha256": null
+    },
+    "generationStrategy": "canonical-preset-sample-then-reference",
+    "voiceSampleSeconds": 12,
+    "requireVoiceSampleApproval": true,
+    "requireNarrationApproval": true,
+    "cfgValue": 2.0,
+    "ditSteps": 10,
+    "normalize": false,
+    "denoise": false,
+    "checkTimeoutSeconds": 10,
+    "generationTimeoutSeconds": 180,
+    "stallTimeoutSeconds": 45,
+    "segmentation": {
+      "charsPerSecond": 4.0,
+      "targetSeconds": 30,
+      "maxSeconds": 45
+    },
+    "quality": {
+      "requireReferenceForMultipleSegments": true,
+      "maxRmsDeltaDb": 4.0,
+      "maxClippedSampleRatio": 0.0001
+    }
+  }
+}

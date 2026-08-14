@@ -1,0 +1,205 @@
+{
+  "schemaVersion": 4,
+  "editorialMode": "technical-single-point",
+  "sourceMode": "editorial-recut",
+  "designRead": "Reading this as: a single-mechanism Agent runtime demonstration for technical mobile viewers, using a restrained execution-trace workspace, with one source-derived JSON object as proof.",
+  "audienceThesis": "The viewer should see exactly how tool discovery changes runtime state and where permission remains separate.",
+  "visualWorld": "A neutral runtime workbench where one request packet, one schema object, and one permission gate remain spatially consistent.",
+  "typography": "One legible CJK sans family handles explanation and captions; monospace is limited to exact JSON fields.",
+  "fontPolicy": {
+    "primaryCjkFamily": "Microsoft YaHei",
+    "source": "verified-system",
+    "assetPath": null,
+    "fallbackFamilies": ["Noto Sans CJK SC", "sans-serif"],
+    "ordinaryTextUsesPrimary": true,
+    "monospaceScopes": ["code", "aligned-data"]
+  },
+  "colorLogic": "Neutral structure stays gray; requests are blue, verified results green, permission uncertainty amber, rejection red, and the current teaching focus near-black.",
+  "colorTokens": {
+    "neutral": "#E8EAED",
+    "request": "#2563EB",
+    "result": "#15803D",
+    "warning": "#B45309",
+    "error": "#B91C1C",
+    "focus": "#111827"
+  },
+  "graphicLanguage": "One runtime rail, square state containers, exact field labels, and directional routes without decorative telemetry.",
+  "motionGrammar": "The same request packet travels forward, the schema assembles around it, and the result returns until a permission gate interrupts the path.",
+  "openingFrame": "An empty tool registry and the literal proposition '发现工具，不等于获得权限' are visible immediately.",
+  "dials": {
+    "designVariance": 6,
+    "motionIntensity": 5,
+    "visualDensity": 5
+  },
+  "technicalVisualMode": "request-response",
+  "proofObjectIds": ["P01"],
+  "transitionGrammar": {
+    "primaryFamily": "object-handoff",
+    "accentFamilies": ["deliberate-hard-cut"]
+  },
+  "motionThesis": "An uncallable runtime becomes schema-capable through discovery, then stops at a separate permission boundary.",
+  "focalSceneId": "S02",
+  "scenes": [
+    {
+      "id": "S01",
+      "startSec": 0.0,
+      "endSec": 6.0,
+      "viewerQuestion": "What state is the runtime in before discovery?",
+      "cognitiveJob": "Establish the empty registry and the single proposition.",
+      "dominantTakeaway": "Without a registered schema, the model has no callable tool contract.",
+      "contentIds": ["C01"],
+      "sourceIds": ["r-example-source"],
+      "layoutFamily": "state-before",
+      "transitionIn": "cut",
+      "transitionContinuity": {
+        "type": "opening",
+        "audioBridge": "none",
+        "narrativePurpose": "Establish the initial state without implying prior continuity."
+      },
+      "sourceDensity": "low",
+      "evidenceTreatment": "authored-empty-registry",
+      "primaryReadingSurface": "authored",
+      "minPrimaryTextPx": 48,
+      "captionMaxLines": 2,
+      "minCaptionTextPx": 40,
+      "containment": {
+        "mode": "strict",
+        "containerIds": ["registry", "proposition"],
+        "intentionalOverflowIds": []
+      },
+      "reviewMoments": [
+        {"phase": "entrance", "atSec": 0.3},
+        {"phase": "development", "atSec": 1.8},
+        {"phase": "hold", "atSec": 4.8},
+        {"phase": "exit", "atSec": 5.8}
+      ],
+      "beats": [
+        {"atSec": 0.0, "durationSec": 2.2, "kind": "state-before", "actor": "empty-registry", "purpose": "Show the uncallable initial state", "motion": "registry opens and resolves to zero tools"},
+        {"atSec": 2.2, "durationSec": 3.8, "kind": "readable-hold", "actor": "proposition", "purpose": "Hold the single technical proposition", "motion": "stable hold with the empty count highlighted"}
+      ]
+    },
+    {
+      "id": "S02",
+      "startSec": 6.0,
+      "endSec": 15.0,
+      "viewerQuestion": "What exactly changes during discovery?",
+      "cognitiveJob": "Prove schema registration using one source-derived JSON response.",
+      "dominantTakeaway": "Name, description, and inputSchema assemble into a callable contract.",
+      "contentIds": ["C01", "D01", "R01"],
+      "sourceIds": ["r-example-source"],
+      "layoutFamily": "json-to-runtime",
+      "transitionIn": "packet-match",
+      "transitionContinuity": {
+        "type": "continuous",
+        "outgoingAnchor": "empty-registry-slot",
+        "incomingAnchor": "discovery-request-packet",
+        "motionDirection": "right",
+        "audioBridge": "j-cut",
+        "narrativePurpose": "The empty registry emits the request that will populate it."
+      },
+      "sourceDensity": "medium",
+      "evidenceTreatment": "source-derived-json-proof",
+      "primaryReadingSurface": "authored",
+      "minPrimaryTextPx": 36,
+      "captionMaxLines": 2,
+      "minCaptionTextPx": 40,
+      "containment": {
+        "mode": "strict",
+        "containerIds": ["json-proof", "runtime-registry"],
+        "intentionalOverflowIds": []
+      },
+      "reviewMoments": [
+        {"phase": "entrance", "atSec": 0.3},
+        {"phase": "development", "atSec": 3.5},
+        {"phase": "hold", "atSec": 7.4},
+        {"phase": "exit", "atSec": 8.8}
+      ],
+      "beats": [
+        {"atSec": 0.0, "durationSec": 2.0, "kind": "establish", "actor": "discovery-request", "purpose": "Show the request entering the runtime", "motion": "blue packet continues from the prior registry slot"},
+        {"atSec": 2.0, "durationSec": 4.2, "kind": "mechanism", "actor": "json-proof", "purpose": "Show the fields that create the callable contract", "motion": "name, description, and inputSchema register in order"},
+        {"atSec": 6.2, "durationSec": 2.8, "kind": "readable-hold", "actor": "registered-schema", "purpose": "Let the exact fields remain readable", "motion": "stable field selection and green registered state"}
+      ]
+    },
+    {
+      "id": "S03",
+      "startSec": 15.0,
+      "endSec": 23.0,
+      "viewerQuestion": "What can the model do after registration?",
+      "cognitiveJob": "Show the resulting schema-valid tool call.",
+      "dominantTakeaway": "The model can now construct arguments that satisfy the registered schema.",
+      "contentIds": ["C01", "R01"],
+      "sourceIds": ["r-example-source"],
+      "layoutFamily": "valid-call",
+      "transitionIn": "field-to-argument",
+      "transitionContinuity": {
+        "type": "continuous",
+        "outgoingAnchor": "inputSchema-field",
+        "incomingAnchor": "tool-call-arguments",
+        "motionDirection": "right",
+        "audioBridge": "l-cut",
+        "narrativePurpose": "The schema field becomes the constraint around the generated arguments."
+      },
+      "sourceDensity": "medium",
+      "evidenceTreatment": "authored-schema-valid-call",
+      "primaryReadingSurface": "authored",
+      "minPrimaryTextPx": 38,
+      "captionMaxLines": 2,
+      "minCaptionTextPx": 40,
+      "containment": {
+        "mode": "strict",
+        "containerIds": ["call-packet", "validation-result"],
+        "intentionalOverflowIds": []
+      },
+      "reviewMoments": [
+        {"phase": "entrance", "atSec": 0.3},
+        {"phase": "development", "atSec": 2.8},
+        {"phase": "hold", "atSec": 6.2},
+        {"phase": "exit", "atSec": 7.8}
+      ],
+      "beats": [
+        {"atSec": 0.0, "durationSec": 3.2, "kind": "state-after", "actor": "valid-call", "purpose": "Show the callable output state", "motion": "arguments lock into the inherited schema outline"},
+        {"atSec": 3.2, "durationSec": 4.8, "kind": "readable-hold", "actor": "validation-result", "purpose": "Hold the schema-valid result", "motion": "stable green validation with exact arguments visible"}
+      ]
+    },
+    {
+      "id": "S04",
+      "startSec": 23.0,
+      "endSec": 30.0,
+      "viewerQuestion": "Does a valid call automatically execute?",
+      "cognitiveJob": "Expose the separate permission boundary.",
+      "dominantTakeaway": "Discovery and schema validity do not grant execution permission.",
+      "contentIds": ["L01"],
+      "sourceIds": ["r-example-source"],
+      "layoutFamily": "permission-boundary",
+      "transitionIn": "hard-cut",
+      "transitionContinuity": {
+        "type": "deliberate-break",
+        "breakReason": "A permission rejection is a narrative interruption, not a continuous success state.",
+        "motionDirection": "none",
+        "audioBridge": "silence-cut",
+        "narrativePurpose": "Reset attention and reveal the boundary the valid call cannot cross."
+      },
+      "sourceDensity": "low",
+      "evidenceTreatment": "authored-permission-gate",
+      "primaryReadingSurface": "authored",
+      "minPrimaryTextPx": 44,
+      "captionMaxLines": 2,
+      "minCaptionTextPx": 40,
+      "containment": {
+        "mode": "strict",
+        "containerIds": ["permission-gate", "boundary-summary"],
+        "intentionalOverflowIds": []
+      },
+      "reviewMoments": [
+        {"phase": "entrance", "atSec": 0.2},
+        {"phase": "development", "atSec": 2.2},
+        {"phase": "hold", "atSec": 5.4},
+        {"phase": "exit", "atSec": 6.8}
+      ],
+      "beats": [
+        {"atSec": 0.0, "durationSec": 2.8, "kind": "boundary", "actor": "permission-gate", "purpose": "Show the independent authorization decision", "motion": "amber gate closes and rejects the green call path"},
+        {"atSec": 2.8, "durationSec": 4.2, "kind": "readable-hold", "actor": "boundary-summary", "purpose": "Hold the exact technical boundary", "motion": "stable conclusion with permission separated from discovery"}
+      ]
+    }
+  ]
+}

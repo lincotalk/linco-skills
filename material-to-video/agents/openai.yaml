@@ -1,0 +1,4 @@
+interface:
+  display_name: "Material to Video"
+  short_description: "Create sourced short videos with natural Chinese voiceover"
+  default_prompt: "Use $material-to-video to turn my selected materials or researched topic into a sourced short video with calm, natural Chinese narration."

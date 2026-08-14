@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-14T00:00:00Z",
+  "inputRoots": ["replace-with-an-explicit-user-selected-root"],
+  "excludedRoots": ["replace-with-workspace/jobs"],
+  "summary": {
+    "total": 1,
+    "supported": 1,
+    "unsupported": 0,
+    "exactDuplicateGroups": 0,
+    "categories": {"text": 1}
+  },
+  "duplicateGroups": [],
+  "items": [
+    {
+      "id": "m-0123456789abcdef-01234567",
+      "rootIndex": 0,
+      "relativePath": "example.md",
+      "name": "example.md",
+      "extension": ".md",
+      "category": "text",
+      "mime": "text/markdown",
+      "bytes": 100,
+      "sha256": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+      "modifiedAt": "2026-08-14T00:00:00Z",
+      "warnings": [],
+      "exactDuplicate": false
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+# Linco Skills
+
+Open-source agent skills maintained by Linco.
+
+## Included skill
+
+### `material-to-video`
+
+Turns user-selected local materials, a researched topic, or both into a traceable narrated vertical video for Douyin, Xiaohongshu, WeChat Channels, or one cross-platform master.
+
+The skill owns source intake, local extraction, research records, claim traceability, editorial planning, VoxCPM narration, cover planning, and bounded visual review. HyperFrames owns composition, preview, checks, and rendering.
+
+Supported local inputs include PNG, JPEG, WebP, GIF, PDF, DOCX, PPTX, TXT, Markdown, HTML, WAV, MP3, M4A, MP4, MOV, and WebM. Text, HTML, DOCX, and PPTX are extracted locally. Audio and video metadata use FFprobe. PDF text uses optional `pypdf` or `pdftotext`; images and media requiring semantic interpretation remain hard-gated until visual review or transcription is recorded.
+
+## Requirements
+
+- Codex Desktop with access to the user-selected local paths
+- Python 3.10 or newer
+- Node.js 22 or newer
+- FFmpeg and FFprobe
+- HyperFrames for composition, preview, and rendering
+- A compatible VoxCPM Gradio endpoint when narration is enabled
+- Optional: `pypdf` or `pdftotext` for deterministic PDF text extraction
+
+The Python scripts otherwise use only the standard library.
+
+## Installation
+
+This Skill is currently installed from source. The `npx` command below installs the
+HyperFrames dependency; it does not install `material-to-video` itself.
+
+First install or update the HyperFrames skill pack:
+
+```bash
+npx hyperframes@latest skills
+```
+
+Then clone this repository and copy `material-to-video` into the Codex skills directory.
+
+PowerShell:
+
+```powershell
+git clone https://github.com/lincotalk/linco-skills.git
+Set-Location .\linco-skills
+
+$codexRoot = if ($env:CODEX_HOME) { $env:CODEX_HOME } else { Join-Path $HOME ".codex" }
+New-Item -ItemType Directory -Force (Join-Path $codexRoot "skills") | Out-Null
+$skillTarget = Join-Path $codexRoot "skills\material-to-video"
+New-Item -ItemType Directory -Force $skillTarget | Out-Null
+Copy-Item -Recurse -Force .\material-to-video\* $skillTarget
+```
+
+Bash:
+
+```bash
+git clone https://github.com/lincotalk/linco-skills.git
+cd linco-skills
+
+mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
+mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills/material-to-video"
+cp -R ./material-to-video/. "${CODEX_HOME:-$HOME/.codex}/skills/material-to-video"
+```
+
+Confirm that `<skills-directory>/material-to-video/SKILL.md` exists, then restart or
+reload Codex so the skill metadata is discovered. To update later, run `git pull` in the
+cloned repository and repeat the copy command. HyperFrames scaffolds each generated
+project with a pinned CLI version, keeping later preview and render commands reproducible.
+
+## Usage
+
+Example requests:
+
+```text
+Use $material-to-video to turn these selected slides into a Xiaohongshu video: D:\materials\deck.pptx
+```
+
+```text
+Use $material-to-video to research how MCP tool discovery differs from permission, then make a Douyin technical single-point video.
+```
+
+```text
+Use $material-to-video to combine these local notes with current official sources and produce one cross-platform version. Finish autonomously until the mandatory final render approval.
+```
+
+Every job is isolated under `<workspace>/jobs/<job-slug>/`. Source records and editorial models remain at the job root. The HyperFrames project lives in `project/`, with `BRIEF.md`, `STORYBOARD.md`, and `SCRIPT.md` at that project root as required by HyperFrames.
+
+The skill never publishes or uploads the final result to a social platform.
+
+## Narration service
+
+The repository does not include, host, or default to a narration endpoint. Deploy [OpenBMB/VoxCPM](https://github.com/OpenBMB/VoxCPM), then configure the base URL of its compatible Gradio service. The base URL must expose `/config`, `/gradio_api/info`, and the named `/generate` API documented in [`tts-contract.md`](material-to-video/references/tts-contract.md).
+
+Do not configure the concrete `/generate` route. For example, use `https://tts.example.com`, not `https://tts.example.com/generate`.
+
+PowerShell:
+
+```powershell
+$env:VOXCPM_TTS_URL = "https://your-voxcpm-service.example.com"
+$env:VOXCPM_TTS_TOKEN = "your-bearer-token" # only when required
+python material-to-video/scripts/generate_voxcpm_voice.py --check `
+  --config material-to-video/assets/config.example.json
+```
+
+Bash:
+
+```bash
+export VOXCPM_TTS_URL="https://your-voxcpm-service.example.com"
+export VOXCPM_TTS_TOKEN="your-bearer-token" # only when required
+python material-to-video/scripts/generate_voxcpm_voice.py --check \
+  --config material-to-video/assets/config.example.json
+```
+
+You may instead pass `--endpoint` or set `tts.endpoint` in a job-local config. Prefer `VOXCPM_TTS_TOKEN` over `--auth-token`, which may be visible in a process list. Never put credentials in the endpoint URL or job config.
+
+Check configuration without making a network request:
+
+```bash
+python material-to-video/scripts/generate_voxcpm_voice.py --check-config \
+  --config material-to-video/assets/config.example.json
+```
+
+On first use, the Skill runs this offline preflight automatically. When no service is configured, it links to OpenBMB/VoxCPM and asks users who already deployed it to provide the Gradio service base URL. Content planning may continue, but narration remains a hard stop until the service is configured and passes the live `--check`.
+
+When no endpoint is configured, the client returns `tts_not_configured`, makes no network request, and preserves the approved script for resume. Treat any configured TTS service as an external data processor. Do not send confidential narration or reference audio to an untrusted deployment.
+
+## Validation
+
+Run the repository checks before contributing or releasing:
+
+```bash
+python -m compileall -q material-to-video
+python -m unittest discover -s tests -v
+```
+
+CI runs the same checks on Windows and Ubuntu with Python 3.10 and 3.12. A live VoxCPM call and a full HyperFrames render require external services and are intentionally not part of repository CI.
+
+## Security and privacy
+
+Local material is read only from paths selected by the user. The workflow does not disclose private local content to search services, rejects manifest path traversal, blocks cross-origin TTS redirects, and keeps bearer tokens out of generated manifests. See [SECURITY.md](SECURITY.md) for vulnerability reporting.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md). By contributing, you agree that your contribution is licensed under Apache License 2.0.
+
+## License
+
+Copyright 2026 Linco. Licensed under the [Apache License 2.0](LICENSE).
