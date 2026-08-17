@@ -1,5 +1,7 @@
 # Linco Skills
 
+[English](README.md) | [简体中文](README.zh-CN.md)
+
 Open-source agent skills maintained by Linco.
 
 ## Included skill
