@@ -4,6 +4,14 @@
 
 Open-source agent skills maintained by Linco.
 
+## Community
+
+Scan the QR code to join **Linco Technical Community Group 6** for project updates, usage discussions, and issue feedback.
+
+> The current QR code is valid through August 25, 2026. Check this page for an updated code after it expires.
+
+<img src=".github/assets/linco-tech-community-group-6.jpg" alt="WeChat QR code for Linco Technical Community Group 6" width="420">
+
 ## Included skill
 
 ### `material-to-video`

@@ -4,6 +4,14 @@
 
 Linco 维护的开源 Agent Skills。
 
+## 社区群聊
+
+欢迎扫码加入 **Linco技术交流群 6**，获取项目动态、交流使用经验并反馈问题。
+
+> 当前二维码有效期至 2026 年 8 月 25 日。过期后请查看本页是否已更新。
+
+<img src=".github/assets/linco-tech-community-group-6.jpg" alt="Linco技术交流群 6 微信群二维码" width="420">
+
 ## 内置 Skill
 
 ### `material-to-video`
