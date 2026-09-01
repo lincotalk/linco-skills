@@ -1,0 +1,4 @@
+interface:
+  display_name: "照片编辑海报生成"
+  short_description: "用 GPT Image 2 CLI 将单张照片制作成上下分区的高端编辑海报"
+  default_prompt: "请将这张照片制作成 3:4 上下各 50% 的高端编辑海报，保留真实主体并加入黑线涂鸦小人物。"

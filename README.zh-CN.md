@@ -4,15 +4,7 @@
 
 Linco 维护的开源 Agent Skills。
 
-## 社区群聊
-
-欢迎扫码加入 **Linco技术交流群 6**，获取项目动态、交流使用经验并反馈问题。
-
-> 当前二维码有效期至 2026 年 8 月 25 日。过期后请查看本页是否已更新。
-
-<img src=".github/assets/linco-tech-community-group-6.jpg" alt="Linco技术交流群 6 微信群二维码" width="420">
-
-## 内置 Skill
+## 内置 Skills
 
 ### `material-to-video`
 
@@ -21,6 +13,12 @@ Linco 维护的开源 Agent Skills。
 该 Skill 负责素材接入、本地内容提取、调研记录、事实追溯、编辑策划、VoxCPM 旁白、封面规划和有限轮次的视觉审查。HyperFrames 负责视频合成、预览、检查和渲染。
 
 支持的本地输入格式包括 PNG、JPEG、WebP、GIF、PDF、DOCX、PPTX、TXT、Markdown、HTML、WAV、MP3、M4A、MP4、MOV 和 WebM。文本、HTML、DOCX 和 PPTX 文件会在本地提取内容；音视频元数据通过 FFprobe 获取；PDF 文本可选用 `pypdf` 或 `pdftotext` 提取。对于需要语义理解的图片和媒体，在完成视觉审查或转录记录前，工作流会保持硬性阻断。
+
+### `meaning-led-photo-poster`
+
+使用 GPT Image 2 的参考图编辑能力，将每张上传的照片制作成独立的高端编辑海报。输出为 3:4 竖版海报，并严格按横向 50/50 分区：上半部分保留真实摄影效果，下半部分保留主体可辨识度并进行主题化再诠释，同时加入黑色细线涂鸦小人物和少量手写文案。
+
+该工作流需要 Bun，以及支持参考图的 GPT Image 2 CLI 配置。向外部图像端点发送包含可识别人物的照片前，工作流会先请求授权；生成后会验证文件存在、可读且已完成视觉检查。
 
 ## 环境要求
 
@@ -44,10 +42,17 @@ Linco 维护的开源 Agent Skills。
 npx --yes skills add lincotalk/linco-skills@material-to-video -y
 ```
 
+将 `meaning-led-photo-poster` 安装到当前项目：
+
+```bash
+npx --yes skills add lincotalk/linco-skills@meaning-led-photo-poster -y
+```
+
 在 Windows PowerShell 中，如果脚本执行策略阻止运行 `npx.ps1`，请改用 `npx.cmd`：
 
 ```powershell
 npx.cmd --yes skills add lincotalk/linco-skills@material-to-video -y
+npx.cmd --yes skills add lincotalk/linco-skills@meaning-led-photo-poster -y
 ```
 
 项目级安装会将 Skill 放到 `.agents/skills/material-to-video`，使其随项目一起管理。添加 `-g` 可执行用户级安装，让所有项目都能使用：
@@ -55,6 +60,9 @@ npx.cmd --yes skills add lincotalk/linco-skills@material-to-video -y
 ```bash
 npx --yes skills add lincotalk/linco-skills@material-to-video -g -y
 ```
+
+如需用户级安装海报 Skill，请将命令中的 `material-to-video` 替换为
+`meaning-led-photo-poster`。
 
 安装或更新视频合成和渲染所需的 HyperFrames Skill 包：
 
@@ -66,7 +74,7 @@ npx hyperframes@latest skills
 
 ### 从源码安装
 
-克隆仓库，可按需切换到某个发布标签，然后将 `material-to-video` 复制到 Codex Skills 目录。
+克隆仓库，可按需切换到某个发布标签，然后将需要的 Skill 复制到 Codex Skills 目录。
 
 PowerShell：
 
@@ -80,6 +88,9 @@ New-Item -ItemType Directory -Force (Join-Path $codexRoot "skills") | Out-Null
 $skillTarget = Join-Path $codexRoot "skills\material-to-video"
 New-Item -ItemType Directory -Force $skillTarget | Out-Null
 Copy-Item -Recurse -Force .\material-to-video\* $skillTarget
+$posterTarget = Join-Path $codexRoot "skills\meaning-led-photo-poster"
+New-Item -ItemType Directory -Force $posterTarget | Out-Null
+Copy-Item -Recurse -Force .\meaning-led-photo-poster\* $posterTarget
 ```
 
 Bash：
@@ -92,9 +103,11 @@ cd linco-skills
 mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
 mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills/material-to-video"
 cp -R ./material-to-video/. "${CODEX_HOME:-$HOME/.codex}/skills/material-to-video"
+mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills/meaning-led-photo-poster"
+cp -R ./meaning-led-photo-poster/. "${CODEX_HOME:-$HOME/.codex}/skills/meaning-led-photo-poster"
 ```
 
-确认 `<skills-directory>/material-to-video/SKILL.md` 存在，然后重新加载 Codex。以后要更新源码安装版本时，在克隆的仓库中运行 `git pull`，再重复执行复制命令即可。HyperFrames 会为每个生成的项目固定 CLI 版本，保证后续预览和渲染命令可复现。
+确认 `<skills-directory>/material-to-video/SKILL.md` 和 `<skills-directory>/meaning-led-photo-poster/SKILL.md` 存在，然后重新加载 Codex。以后要更新源码安装版本时，在克隆的仓库中运行 `git pull`，再重复执行复制命令即可。HyperFrames 会为每个生成的项目固定 CLI 版本，保证后续预览和渲染命令可复现。
 
 ## 使用方法
 
@@ -110,6 +123,10 @@ cp -R ./material-to-video/. "${CODEX_HOME:-$HOME/.codex}/skills/material-to-vide
 
 ```text
 使用 $material-to-video，结合这些本地笔记和最新官方来源，制作一个跨平台通用版本。除最终渲染的必要确认外，请自主完成整个流程。
+```
+
+```text
+使用 $meaning-led-photo-poster，将这张上传的照片制作成严格上下各 50% 的高端 3:4 编辑海报。
 ```
 
 每个任务都会隔离在 `<workspace>/jobs/<job-slug>/` 目录中。来源记录和编辑模型保存在任务根目录；HyperFrames 项目位于 `project/`，其根目录会按照 HyperFrames 的要求包含 `BRIEF.md`、`STORYBOARD.md` 和 `SCRIPT.md`。

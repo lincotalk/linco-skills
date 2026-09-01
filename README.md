@@ -4,15 +4,7 @@
 
 Open-source agent skills maintained by Linco.
 
-## Community
-
-Scan the QR code to join **Linco Technical Community Group 6** for project updates, usage discussions, and issue feedback.
-
-> The current QR code is valid through August 25, 2026. Check this page for an updated code after it expires.
-
-<img src=".github/assets/linco-tech-community-group-6.jpg" alt="WeChat QR code for Linco Technical Community Group 6" width="420">
-
-## Included skill
+## Included skills
 
 ### `material-to-video`
 
@@ -21,6 +13,12 @@ Turns user-selected local materials, a researched topic, or both into a traceabl
 The skill owns source intake, local extraction, research records, claim traceability, editorial planning, VoxCPM narration, cover planning, and bounded visual review. HyperFrames owns composition, preview, checks, and rendering.
 
 Supported local inputs include PNG, JPEG, WebP, GIF, PDF, DOCX, PPTX, TXT, Markdown, HTML, WAV, MP3, M4A, MP4, MOV, and WebM. Text, HTML, DOCX, and PPTX are extracted locally. Audio and video metadata use FFprobe. PDF text uses optional `pypdf` or `pdftotext`; images and media requiring semantic interpretation remain hard-gated until visual review or transcription is recorded.
+
+### `meaning-led-photo-poster`
+
+Creates a standalone premium editorial poster from each uploaded photo using GPT Image 2 reference-image editing. The output is a 3:4 vertical poster with an exact horizontal 50/50 split: realistic photography on top and a recognizable reinterpretation of the subject below, with fine-line doodle people and sparse handwritten copy.
+
+The workflow requires Bun and a configured GPT Image 2 CLI that supports reference images. It asks for authorization before sending identifiable people to the external image endpoint, and verifies each generated file before reporting success.
 
 ## Requirements
 
@@ -44,10 +42,17 @@ Install `material-to-video` into the current project:
 npx --yes skills add lincotalk/linco-skills@material-to-video -y
 ```
 
+Install `meaning-led-photo-poster` into the current project:
+
+```bash
+npx --yes skills add lincotalk/linco-skills@meaning-led-photo-poster -y
+```
+
 On Windows PowerShell, use `npx.cmd` when script execution policy blocks `npx.ps1`:
 
 ```powershell
 npx.cmd --yes skills add lincotalk/linco-skills@material-to-video -y
+npx.cmd --yes skills add lincotalk/linco-skills@meaning-led-photo-poster -y
 ```
 
 Project installation places the Skill under `.agents/skills/material-to-video` so it
@@ -57,6 +62,9 @@ projects:
 ```bash
 npx --yes skills add lincotalk/linco-skills@material-to-video -g -y
 ```
+
+For a user-level installation of the poster skill, use the same command with
+`meaning-led-photo-poster` in place of `material-to-video`.
 
 Install or update the HyperFrames skill pack required for composition and rendering:
 
@@ -68,8 +76,7 @@ Reload Codex after installation so the new Skill is discovered.
 
 ### Install from source
 
-Clone the repository, optionally check out a release tag, then copy
-`material-to-video` into the Codex skills directory.
+Clone the repository, optionally check out a release tag, then copy the skills you need into the Codex skills directory.
 
 PowerShell:
 
@@ -83,6 +90,9 @@ New-Item -ItemType Directory -Force (Join-Path $codexRoot "skills") | Out-Null
 $skillTarget = Join-Path $codexRoot "skills\material-to-video"
 New-Item -ItemType Directory -Force $skillTarget | Out-Null
 Copy-Item -Recurse -Force .\material-to-video\* $skillTarget
+$posterTarget = Join-Path $codexRoot "skills\meaning-led-photo-poster"
+New-Item -ItemType Directory -Force $posterTarget | Out-Null
+Copy-Item -Recurse -Force .\meaning-led-photo-poster\* $posterTarget
 ```
 
 Bash:
@@ -95,9 +105,11 @@ cd linco-skills
 mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
 mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills/material-to-video"
 cp -R ./material-to-video/. "${CODEX_HOME:-$HOME/.codex}/skills/material-to-video"
+mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills/meaning-led-photo-poster"
+cp -R ./meaning-led-photo-poster/. "${CODEX_HOME:-$HOME/.codex}/skills/meaning-led-photo-poster"
 ```
 
-Confirm that `<skills-directory>/material-to-video/SKILL.md` exists, then reload Codex.
+Confirm that `<skills-directory>/material-to-video/SKILL.md` and `<skills-directory>/meaning-led-photo-poster/SKILL.md` exist, then reload Codex.
 To update a source installation later, run `git pull` in the cloned repository and repeat
 the copy command. HyperFrames scaffolds each generated project with a pinned CLI version,
 keeping later preview and render commands reproducible.
@@ -118,7 +130,11 @@ Use $material-to-video to research how MCP tool discovery differs from permissio
 Use $material-to-video to combine these local notes with current official sources and produce one cross-platform version. Finish autonomously until the mandatory final render approval.
 ```
 
-Every job is isolated under `<workspace>/jobs/<job-slug>/`. Source records and editorial models remain at the job root. The HyperFrames project lives in `project/`, with `BRIEF.md`, `STORYBOARD.md`, and `SCRIPT.md` at that project root as required by HyperFrames.
+```text
+Use $meaning-led-photo-poster to turn this uploaded photo into a premium 3:4 editorial poster with an exact 50/50 split.
+```
+
+Every job is isolated under `<workspace>/jobs/<job-slug>`. Source records and editorial models remain at the job root. The HyperFrames project lives in `project/`, with `BRIEF.md`, `STORYBOARD.md`, and `SCRIPT.md` at that project root as required by HyperFrames.
 
 The skill never publishes or uploads the final result to a social platform.
 
