@@ -26,6 +26,12 @@ Turns one supplied travel, street, pet, family, landscape, or daily-life photo i
 
 The workflow uses an image generation or editing tool, preserves recognition through simplified shapes and source-derived colors, and checks the aspect ratio, sticker count, keyword count, and unwanted text before delivery.
 
+### `photo-gathered-zine`
+
+Transforms one supplied photograph into a vertical 3:5 editorial paper-collage poster. It keeps a truthful photographic anchor while extending source-derived forms into a sparse illustration field, joined by a visibly fibrous torn-paper edge.
+
+The workflow preserves the scene's identifying subjects and spatial logic, uses exactly one source-tied high-chroma accent color, and reviews photo fidelity, quiet space, material handoff, and thumbnail clarity before delivery.
+
 ## Requirements
 
 - Codex Desktop with access to the user-selected local paths
@@ -60,12 +66,19 @@ Install `journey-sticker-card` into the current project:
 npx --yes skills add lincotalk/linco-skills@journey-sticker-card -y
 ```
 
+Install `photo-gathered-zine` into the current project:
+
+```bash
+npx --yes skills add lincotalk/linco-skills@photo-gathered-zine -y
+```
+
 On Windows PowerShell, use `npx.cmd` when script execution policy blocks `npx.ps1`:
 
 ```powershell
 npx.cmd --yes skills add lincotalk/linco-skills@material-to-video -y
 npx.cmd --yes skills add lincotalk/linco-skills@meaning-led-photo-poster -y
 npx.cmd --yes skills add lincotalk/linco-skills@journey-sticker-card -y
+npx.cmd --yes skills add lincotalk/linco-skills@photo-gathered-zine -y
 ```
 
 Project installation places the Skill under `.agents/skills/material-to-video` so it
@@ -81,6 +94,9 @@ For a user-level installation of the poster skill, use the same command with
 
 For a user-level installation of the sticker-card skill, use the same command with
 `journey-sticker-card` in place of `material-to-video`.
+
+For a user-level installation of the photo-zine skill, use the same command with
+`photo-gathered-zine` in place of `material-to-video`.
 
 Install or update the HyperFrames skill pack required for composition and rendering:
 
@@ -112,6 +128,9 @@ Copy-Item -Recurse -Force .\meaning-led-photo-poster\* $posterTarget
 $stickerTarget = Join-Path $codexRoot "skills\journey-sticker-card"
 New-Item -ItemType Directory -Force $stickerTarget | Out-Null
 Copy-Item -Recurse -Force .\journey-sticker-card\* $stickerTarget
+$zineTarget = Join-Path $codexRoot "skills\photo-gathered-zine"
+New-Item -ItemType Directory -Force $zineTarget | Out-Null
+Copy-Item -Recurse -Force .\photo-gathered-zine\* $zineTarget
 ```
 
 Bash:
@@ -128,9 +147,11 @@ mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills/meaning-led-photo-poster"
 cp -R ./meaning-led-photo-poster/. "${CODEX_HOME:-$HOME/.codex}/skills/meaning-led-photo-poster"
 mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills/journey-sticker-card"
 cp -R ./journey-sticker-card/. "${CODEX_HOME:-$HOME/.codex}/skills/journey-sticker-card"
+mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills/photo-gathered-zine"
+cp -R ./photo-gathered-zine/. "${CODEX_HOME:-$HOME/.codex}/skills/photo-gathered-zine"
 ```
 
-Confirm that `<skills-directory>/material-to-video/SKILL.md`, `<skills-directory>/meaning-led-photo-poster/SKILL.md`, and `<skills-directory>/journey-sticker-card/SKILL.md` exist, then reload Codex.
+Confirm that `<skills-directory>/material-to-video/SKILL.md`, `<skills-directory>/meaning-led-photo-poster/SKILL.md`, `<skills-directory>/journey-sticker-card/SKILL.md`, and `<skills-directory>/photo-gathered-zine/SKILL.md` exist, then reload Codex.
 To update a source installation later, run `git pull` in the cloned repository and repeat
 the copy command. HyperFrames scaffolds each generated project with a pinned CLI version,
 keeping later preview and render commands reproducible.
@@ -157,6 +178,10 @@ Use $meaning-led-photo-poster to turn this uploaded photo into a premium 3:4 edi
 
 ```text
 Use $journey-sticker-card to turn this travel photo into a quiet 3:2 collectible sticker card with six source-derived stickers.
+```
+
+```text
+Use $photo-gathered-zine to turn this photo into a sparse 3:5 editorial paper-collage poster with one source-derived accent color and a torn paper edge.
 ```
 
 Every job is isolated under `<workspace>/jobs/<job-slug>`. Source records and editorial models remain at the job root. The HyperFrames project lives in `project/`, with `BRIEF.md`, `STORYBOARD.md`, and `SCRIPT.md` at that project root as required by HyperFrames.

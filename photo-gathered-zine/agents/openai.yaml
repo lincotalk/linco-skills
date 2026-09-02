@@ -1,0 +1,4 @@
+interface:
+  display_name: "实景留白拼贴海报"
+  short_description: "将照片转化为保真、克制且有纸张触感的竖版拼贴海报"
+  default_prompt: "使用 $photo-gathered-zine 将我提供的照片制作成一张竖版实景拼贴海报。"

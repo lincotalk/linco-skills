@@ -14,7 +14,12 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILL = ROOT / "material-to-video"
-SKILLS = [SKILL, ROOT / "meaning-led-photo-poster", ROOT / "journey-sticker-card"]
+SKILLS = [
+    SKILL,
+    ROOT / "meaning-led-photo-poster",
+    ROOT / "journey-sticker-card",
+    ROOT / "photo-gathered-zine",
+]
 SCRIPTS = SKILL / "scripts"
 ASSETS = SKILL / "assets"
 
@@ -52,7 +57,12 @@ def load_script_module(name: str):
 
 class RepositoryContractTests(unittest.TestCase):
     def test_skill_metadata_and_local_links(self) -> None:
-        expected_names = {"material-to-video", "meaning-led-photo-poster", "journey-sticker-card"}
+        expected_names = {
+            "material-to-video",
+            "meaning-led-photo-poster",
+            "journey-sticker-card",
+            "photo-gathered-zine",
+        }
         for skill in SKILLS:
             skill_text = (skill / "SKILL.md").read_text(encoding="utf-8")
             self.assertTrue(skill_text.startswith(f"---\nname: {skill.name}\n"))

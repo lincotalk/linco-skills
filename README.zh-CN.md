@@ -26,6 +26,12 @@ Linco 维护的开源 Agent Skills。
 
 该工作流使用图像生成或编辑工具，通过简化形状和源照片配色保持辨识度，并在交付前检查画幅比例、贴纸数量、关键词数量及多余文字。
 
+### `photo-gathered-zine`
+
+将一张照片制作成竖向 3:5 的编辑纸质拼贴海报。它保留真实、可辨的摄影锚点，并将源照片衍生的形状延展到留白克制的插画区域，以可见的纤维感手撕纸边界连接两种材质。
+
+该工作流会保留场景的辨识主体和空间逻辑，仅使用一个与源照片形状关联的高饱和强调色，并在交付前审查照片保真度、留白、材质交界和缩略图清晰度。
+
 ## 环境要求
 
 - Codex Desktop，并且能够访问用户选择的本地路径
@@ -60,12 +66,19 @@ npx --yes skills add lincotalk/linco-skills@meaning-led-photo-poster -y
 npx --yes skills add lincotalk/linco-skills@journey-sticker-card -y
 ```
 
+将 `photo-gathered-zine` 安装到当前项目：
+
+```bash
+npx --yes skills add lincotalk/linco-skills@photo-gathered-zine -y
+```
+
 在 Windows PowerShell 中，如果脚本执行策略阻止运行 `npx.ps1`，请改用 `npx.cmd`：
 
 ```powershell
 npx.cmd --yes skills add lincotalk/linco-skills@material-to-video -y
 npx.cmd --yes skills add lincotalk/linco-skills@meaning-led-photo-poster -y
 npx.cmd --yes skills add lincotalk/linco-skills@journey-sticker-card -y
+npx.cmd --yes skills add lincotalk/linco-skills@photo-gathered-zine -y
 ```
 
 项目级安装会将 Skill 放到 `.agents/skills/material-to-video`，使其随项目一起管理。添加 `-g` 可执行用户级安装，让所有项目都能使用：
@@ -79,6 +92,9 @@ npx --yes skills add lincotalk/linco-skills@material-to-video -g -y
 
 如需用户级安装贴纸卡 Skill，请将命令中的 `material-to-video` 替换为
 `journey-sticker-card`。
+
+如需用户级安装照片拼贴 Skill，请将命令中的 `material-to-video` 替换为
+`photo-gathered-zine`。
 
 安装或更新视频合成和渲染所需的 HyperFrames Skill 包：
 
@@ -110,6 +126,9 @@ Copy-Item -Recurse -Force .\meaning-led-photo-poster\* $posterTarget
 $stickerTarget = Join-Path $codexRoot "skills\journey-sticker-card"
 New-Item -ItemType Directory -Force $stickerTarget | Out-Null
 Copy-Item -Recurse -Force .\journey-sticker-card\* $stickerTarget
+$zineTarget = Join-Path $codexRoot "skills\photo-gathered-zine"
+New-Item -ItemType Directory -Force $zineTarget | Out-Null
+Copy-Item -Recurse -Force .\photo-gathered-zine\* $zineTarget
 ```
 
 Bash：
@@ -126,9 +145,11 @@ mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills/meaning-led-photo-poster"
 cp -R ./meaning-led-photo-poster/. "${CODEX_HOME:-$HOME/.codex}/skills/meaning-led-photo-poster"
 mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills/journey-sticker-card"
 cp -R ./journey-sticker-card/. "${CODEX_HOME:-$HOME/.codex}/skills/journey-sticker-card"
+mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills/photo-gathered-zine"
+cp -R ./photo-gathered-zine/. "${CODEX_HOME:-$HOME/.codex}/skills/photo-gathered-zine"
 ```
 
-确认 `<skills-directory>/material-to-video/SKILL.md`、`<skills-directory>/meaning-led-photo-poster/SKILL.md` 和 `<skills-directory>/journey-sticker-card/SKILL.md` 存在，然后重新加载 Codex。以后要更新源码安装版本时，在克隆的仓库中运行 `git pull`，再重复执行复制命令即可。HyperFrames 会为每个生成的项目固定 CLI 版本，保证后续预览和渲染命令可复现。
+确认 `<skills-directory>/material-to-video/SKILL.md`、`<skills-directory>/meaning-led-photo-poster/SKILL.md`、`<skills-directory>/journey-sticker-card/SKILL.md` 和 `<skills-directory>/photo-gathered-zine/SKILL.md` 存在，然后重新加载 Codex。以后要更新源码安装版本时，在克隆的仓库中运行 `git pull`，再重复执行复制命令即可。HyperFrames 会为每个生成的项目固定 CLI 版本，保证后续预览和渲染命令可复现。
 
 ## 使用方法
 
@@ -152,6 +173,10 @@ cp -R ./journey-sticker-card/. "${CODEX_HOME:-$HOME/.codex}/skills/journey-stick
 
 ```text
 使用 $journey-sticker-card，将这张旅行照片制作成带六枚源照片贴纸的安静 3:2 纸质收藏卡。
+```
+
+```text
+使用 $photo-gathered-zine，将这张照片制作成带一个源照片衍生强调色和手撕纸边界的留白 3:5 编辑拼贴海报。
 ```
 
 每个任务都会隔离在 `<workspace>/jobs/<job-slug>/` 目录中。来源记录和编辑模型保存在任务根目录；HyperFrames 项目位于 `project/`，其根目录会按照 HyperFrames 的要求包含 `BRIEF.md`、`STORYBOARD.md` 和 `SCRIPT.md`。
