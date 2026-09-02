@@ -20,6 +20,12 @@ Creates a standalone premium editorial poster from each uploaded photo using GPT
 
 The workflow requires Bun and a configured GPT Image 2 CLI that supports reference images. It asks for authorization before sending identifiable people to the external image endpoint, and verifies each generated file before reporting success.
 
+### `journey-sticker-card`
+
+Turns one supplied travel, street, pet, family, landscape, or daily-life photo into a horizontal 3:2 collectible paper sticker card. The finished bitmap uses a large source-derived illustration, exactly six die-cut memory-fragment stickers, and three short English archive keywords on warm textured paper.
+
+The workflow uses an image generation or editing tool, preserves recognition through simplified shapes and source-derived colors, and checks the aspect ratio, sticker count, keyword count, and unwanted text before delivery.
+
 ## Requirements
 
 - Codex Desktop with access to the user-selected local paths
@@ -48,11 +54,18 @@ Install `meaning-led-photo-poster` into the current project:
 npx --yes skills add lincotalk/linco-skills@meaning-led-photo-poster -y
 ```
 
+Install `journey-sticker-card` into the current project:
+
+```bash
+npx --yes skills add lincotalk/linco-skills@journey-sticker-card -y
+```
+
 On Windows PowerShell, use `npx.cmd` when script execution policy blocks `npx.ps1`:
 
 ```powershell
 npx.cmd --yes skills add lincotalk/linco-skills@material-to-video -y
 npx.cmd --yes skills add lincotalk/linco-skills@meaning-led-photo-poster -y
+npx.cmd --yes skills add lincotalk/linco-skills@journey-sticker-card -y
 ```
 
 Project installation places the Skill under `.agents/skills/material-to-video` so it
@@ -65,6 +78,9 @@ npx --yes skills add lincotalk/linco-skills@material-to-video -g -y
 
 For a user-level installation of the poster skill, use the same command with
 `meaning-led-photo-poster` in place of `material-to-video`.
+
+For a user-level installation of the sticker-card skill, use the same command with
+`journey-sticker-card` in place of `material-to-video`.
 
 Install or update the HyperFrames skill pack required for composition and rendering:
 
@@ -93,6 +109,9 @@ Copy-Item -Recurse -Force .\material-to-video\* $skillTarget
 $posterTarget = Join-Path $codexRoot "skills\meaning-led-photo-poster"
 New-Item -ItemType Directory -Force $posterTarget | Out-Null
 Copy-Item -Recurse -Force .\meaning-led-photo-poster\* $posterTarget
+$stickerTarget = Join-Path $codexRoot "skills\journey-sticker-card"
+New-Item -ItemType Directory -Force $stickerTarget | Out-Null
+Copy-Item -Recurse -Force .\journey-sticker-card\* $stickerTarget
 ```
 
 Bash:
@@ -107,9 +126,11 @@ mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills/material-to-video"
 cp -R ./material-to-video/. "${CODEX_HOME:-$HOME/.codex}/skills/material-to-video"
 mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills/meaning-led-photo-poster"
 cp -R ./meaning-led-photo-poster/. "${CODEX_HOME:-$HOME/.codex}/skills/meaning-led-photo-poster"
+mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills/journey-sticker-card"
+cp -R ./journey-sticker-card/. "${CODEX_HOME:-$HOME/.codex}/skills/journey-sticker-card"
 ```
 
-Confirm that `<skills-directory>/material-to-video/SKILL.md` and `<skills-directory>/meaning-led-photo-poster/SKILL.md` exist, then reload Codex.
+Confirm that `<skills-directory>/material-to-video/SKILL.md`, `<skills-directory>/meaning-led-photo-poster/SKILL.md`, and `<skills-directory>/journey-sticker-card/SKILL.md` exist, then reload Codex.
 To update a source installation later, run `git pull` in the cloned repository and repeat
 the copy command. HyperFrames scaffolds each generated project with a pinned CLI version,
 keeping later preview and render commands reproducible.
@@ -132,6 +153,10 @@ Use $material-to-video to combine these local notes with current official source
 
 ```text
 Use $meaning-led-photo-poster to turn this uploaded photo into a premium 3:4 editorial poster with an exact 50/50 split.
+```
+
+```text
+Use $journey-sticker-card to turn this travel photo into a quiet 3:2 collectible sticker card with six source-derived stickers.
 ```
 
 Every job is isolated under `<workspace>/jobs/<job-slug>`. Source records and editorial models remain at the job root. The HyperFrames project lives in `project/`, with `BRIEF.md`, `STORYBOARD.md`, and `SCRIPT.md` at that project root as required by HyperFrames.

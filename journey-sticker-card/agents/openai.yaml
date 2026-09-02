@@ -1,0 +1,6 @@
+interface:
+  display_name: "Journey Sticker Card"
+  short_description: "Turn photos into quiet paper sticker cards"
+  default_prompt: "Use $journey-sticker-card to turn this travel photo into a quiet collectible sticker card."
+policy:
+  allow_implicit_invocation: true

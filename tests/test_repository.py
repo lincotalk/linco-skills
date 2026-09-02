@@ -14,6 +14,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILL = ROOT / "material-to-video"
+SKILLS = [SKILL, ROOT / "meaning-led-photo-poster", ROOT / "journey-sticker-card"]
 SCRIPTS = SKILL / "scripts"
 ASSETS = SKILL / "assets"
 
@@ -51,11 +52,15 @@ def load_script_module(name: str):
 
 class RepositoryContractTests(unittest.TestCase):
     def test_skill_metadata_and_local_links(self) -> None:
-        skill_text = (SKILL / "SKILL.md").read_text(encoding="utf-8")
-        self.assertTrue(skill_text.startswith("---\nname: material-to-video\n"))
-        self.assertIn("\ndescription:", skill_text.split("---", 2)[1])
-        markdown_files = [ROOT / "README.md", ROOT / "CONTRIBUTING.md", ROOT / "SECURITY.md"]
-        markdown_files.extend(SKILL.rglob("*.md"))
+        expected_names = {"material-to-video", "meaning-led-photo-poster", "journey-sticker-card"}
+        for skill in SKILLS:
+            skill_text = (skill / "SKILL.md").read_text(encoding="utf-8")
+            self.assertTrue(skill_text.startswith(f"---\nname: {skill.name}\n"))
+            self.assertIn("\ndescription:", skill_text.split("---", 2)[1])
+        self.assertEqual({skill.name for skill in SKILLS}, expected_names)
+        markdown_files = [ROOT / "README.md", ROOT / "README.zh-CN.md", ROOT / "CONTRIBUTING.md", ROOT / "SECURITY.md"]
+        for skill in SKILLS:
+            markdown_files.extend(skill.rglob("*.md"))
         for markdown in markdown_files:
             text = markdown.read_text(encoding="utf-8")
             for target in __import__("re").findall(r"\[[^\]]+\]\(([^)]+)\)", text):
