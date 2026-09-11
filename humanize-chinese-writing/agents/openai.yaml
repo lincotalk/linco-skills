@@ -1,0 +1,7 @@
+interface:
+  display_name: "中文去 AI 味"
+  short_description: "诊断、改写和模仿中文文本风格，降低明显 AI 腔。"
+  default_prompt: "Use $humanize-chinese-writing：帮我把这段中文去掉 AI 味，保留原意并改得更自然。"
+
+policy:
+  allow_implicit_invocation: true
