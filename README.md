@@ -32,7 +32,15 @@ Transforms one supplied photograph into a vertical 3:5 editorial paper-collage p
 
 The workflow preserves the scene's identifying subjects and spatial logic, uses exactly one source-tied high-chroma accent color, and reviews photo fidelity, quiet space, material handoff, and thumbnail clarity before delivery.
 
+### `waynex-query`
+
+Queries public Waynex recruitment announcements and campus events using a personal API Key. Supports keyword search, multiple filters, pagination, details, and source links through a read-only API.
+
+Create a Key on the [Waynex API access page](https://waynex.lincolab.com/api-access), then configure `WAYNEX_API_KEY` locally. See the [skill instructions](waynex-query/SKILL.md) and [API reference](waynex-query/references/api.md) for supported queries and limits. The script defaults to `https://waynex.lincolab.com/api/open/v1`.
+
 ## Requirements
+
+Requirements vary by skill. `waynex-query` requires Node.js 20 or newer and a personal Waynex API Key. The following requirements apply to `material-to-video`:
 
 - Codex Desktop with access to the user-selected local paths
 - Python 3.10 or newer
@@ -72,6 +80,12 @@ Install `photo-gathered-zine` into the current project:
 npx --yes skills add lincotalk/linco-skills@photo-gathered-zine -y
 ```
 
+Install `waynex-query` into the current project:
+
+```bash
+npx --yes skills add lincotalk/linco-skills@waynex-query -y
+```
+
 On Windows PowerShell, use `npx.cmd` when script execution policy blocks `npx.ps1`:
 
 ```powershell
@@ -79,6 +93,7 @@ npx.cmd --yes skills add lincotalk/linco-skills@material-to-video -y
 npx.cmd --yes skills add lincotalk/linco-skills@meaning-led-photo-poster -y
 npx.cmd --yes skills add lincotalk/linco-skills@journey-sticker-card -y
 npx.cmd --yes skills add lincotalk/linco-skills@photo-gathered-zine -y
+npx.cmd --yes skills add lincotalk/linco-skills@waynex-query -y
 ```
 
 Project installation places the Skill under `.agents/skills/material-to-video` so it
@@ -97,6 +112,9 @@ For a user-level installation of the sticker-card skill, use the same command wi
 
 For a user-level installation of the photo-zine skill, use the same command with
 `photo-gathered-zine` in place of `material-to-video`.
+
+For a user-level installation of the Waynex query skill, use the same command with
+`waynex-query` in place of `material-to-video`.
 
 Install or update the HyperFrames skill pack required for composition and rendering:
 
@@ -131,6 +149,9 @@ Copy-Item -Recurse -Force .\journey-sticker-card\* $stickerTarget
 $zineTarget = Join-Path $codexRoot "skills\photo-gathered-zine"
 New-Item -ItemType Directory -Force $zineTarget | Out-Null
 Copy-Item -Recurse -Force .\photo-gathered-zine\* $zineTarget
+$queryTarget = Join-Path $codexRoot "skills\waynex-query"
+New-Item -ItemType Directory -Force $queryTarget | Out-Null
+Copy-Item -Recurse -Force .\waynex-query\* $queryTarget
 ```
 
 Bash:
@@ -149,14 +170,42 @@ mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills/journey-sticker-card"
 cp -R ./journey-sticker-card/. "${CODEX_HOME:-$HOME/.codex}/skills/journey-sticker-card"
 mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills/photo-gathered-zine"
 cp -R ./photo-gathered-zine/. "${CODEX_HOME:-$HOME/.codex}/skills/photo-gathered-zine"
+mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills/waynex-query"
+cp -R ./waynex-query/. "${CODEX_HOME:-$HOME/.codex}/skills/waynex-query"
 ```
 
-Confirm that `<skills-directory>/material-to-video/SKILL.md`, `<skills-directory>/meaning-led-photo-poster/SKILL.md`, `<skills-directory>/journey-sticker-card/SKILL.md`, and `<skills-directory>/photo-gathered-zine/SKILL.md` exist, then reload Codex.
+Confirm that each installed skill has a `<skills-directory>/<skill-name>/SKILL.md` file, then reload Codex.
 To update a source installation later, run `git pull` in the cloned repository and repeat
 the copy command. HyperFrames scaffolds each generated project with a pinned CLI version,
 keeping later preview and render commands reproducible.
 
 ## Usage
+
+### Waynex queries
+
+Log in on the [API access page](https://waynex.lincolab.com/api-access) and create a personal API Key. Set it in the environment of the terminal or agent process running the skill:
+
+PowerShell:
+
+```powershell
+$env:WAYNEX_API_KEY = "<your-api-key>"
+```
+
+Bash:
+
+```bash
+export WAYNEX_API_KEY="<your-api-key>"
+```
+
+Replace the placeholder locally; keep the Key out of chat, source files, and version control. The agent process must inherit this environment variable. Then ask:
+
+```text
+Use $waynex-query to find campus recruitment presentations at Guangzhou universities in the next seven days. Show sources and the total count.
+```
+
+Filters, counts, sorting, and pagination are handled by the server. See the [API reference](waynex-query/references/api.md) for supported parameters, quotas, and test or local endpoint configuration.
+
+### Media skills
 
 Example requests:
 
@@ -234,7 +283,13 @@ python -m compileall -q material-to-video
 python -m unittest discover -s tests -v
 ```
 
-CI runs the same checks on Windows and Ubuntu with Python 3.10 and 3.12. A live VoxCPM call and a full HyperFrames render require external services and are intentionally not part of repository CI.
+Run the Waynex query script tests with Node.js 20 or newer:
+
+```bash
+node --test waynex-query/tests/query.test.mjs
+```
+
+These query tests use mocked responses and require no API Key or live service. CI runs the Python checks on Windows and Ubuntu with Python 3.10 and 3.12. A live VoxCPM call and a full HyperFrames render require external services and are intentionally not part of repository CI.
 
 ## Security and privacy
 

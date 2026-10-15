@@ -32,7 +32,15 @@ Linco 维护的开源 Agent Skills。
 
 该工作流会保留场景的辨识主体和空间逻辑，仅使用一个与源照片形状关联的高饱和强调色，并在交付前审查照片保真度、留白、材质交界和缩略图清晰度。
 
+### `waynex-query`
+
+使用个人 API Key 查询 Waynex 的公开招聘公告与校园活动，通过只读 API 支持关键词搜索、多条件筛选、分页、详情和来源链接。
+
+在 [Waynex API 接入页面](https://waynex.lincolab.com/api-access)创建 Key，并在本地配置 `WAYNEX_API_KEY`。支持的查询与限制见 [Skill 使用说明](waynex-query/SKILL.md)和 [API 参考](waynex-query/references/api.md)。脚本默认请求 `https://waynex.lincolab.com/api/open/v1`。
+
 ## 环境要求
+
+不同 Skill 的依赖各自独立。`waynex-query` 需要 Node.js 20 或更高版本，以及个人 Waynex API Key。以下环境要求适用于 `material-to-video`：
 
 - Codex Desktop，并且能够访问用户选择的本地路径
 - Python 3.10 或更高版本
@@ -72,6 +80,12 @@ npx --yes skills add lincotalk/linco-skills@journey-sticker-card -y
 npx --yes skills add lincotalk/linco-skills@photo-gathered-zine -y
 ```
 
+将 `waynex-query` 安装到当前项目：
+
+```bash
+npx --yes skills add lincotalk/linco-skills@waynex-query -y
+```
+
 在 Windows PowerShell 中，如果脚本执行策略阻止运行 `npx.ps1`，请改用 `npx.cmd`：
 
 ```powershell
@@ -79,6 +93,7 @@ npx.cmd --yes skills add lincotalk/linco-skills@material-to-video -y
 npx.cmd --yes skills add lincotalk/linco-skills@meaning-led-photo-poster -y
 npx.cmd --yes skills add lincotalk/linco-skills@journey-sticker-card -y
 npx.cmd --yes skills add lincotalk/linco-skills@photo-gathered-zine -y
+npx.cmd --yes skills add lincotalk/linco-skills@waynex-query -y
 ```
 
 项目级安装会将 Skill 放到 `.agents/skills/material-to-video`，使其随项目一起管理。添加 `-g` 可执行用户级安装，让所有项目都能使用：
@@ -95,6 +110,9 @@ npx --yes skills add lincotalk/linco-skills@material-to-video -g -y
 
 如需用户级安装照片拼贴 Skill，请将命令中的 `material-to-video` 替换为
 `photo-gathered-zine`。
+
+如需用户级安装 Waynex 查询 Skill，请将命令中的 `material-to-video` 替换为
+`waynex-query`。
 
 安装或更新视频合成和渲染所需的 HyperFrames Skill 包：
 
@@ -129,6 +147,9 @@ Copy-Item -Recurse -Force .\journey-sticker-card\* $stickerTarget
 $zineTarget = Join-Path $codexRoot "skills\photo-gathered-zine"
 New-Item -ItemType Directory -Force $zineTarget | Out-Null
 Copy-Item -Recurse -Force .\photo-gathered-zine\* $zineTarget
+$queryTarget = Join-Path $codexRoot "skills\waynex-query"
+New-Item -ItemType Directory -Force $queryTarget | Out-Null
+Copy-Item -Recurse -Force .\waynex-query\* $queryTarget
 ```
 
 Bash：
@@ -147,11 +168,39 @@ mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills/journey-sticker-card"
 cp -R ./journey-sticker-card/. "${CODEX_HOME:-$HOME/.codex}/skills/journey-sticker-card"
 mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills/photo-gathered-zine"
 cp -R ./photo-gathered-zine/. "${CODEX_HOME:-$HOME/.codex}/skills/photo-gathered-zine"
+mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills/waynex-query"
+cp -R ./waynex-query/. "${CODEX_HOME:-$HOME/.codex}/skills/waynex-query"
 ```
 
-确认 `<skills-directory>/material-to-video/SKILL.md`、`<skills-directory>/meaning-led-photo-poster/SKILL.md`、`<skills-directory>/journey-sticker-card/SKILL.md` 和 `<skills-directory>/photo-gathered-zine/SKILL.md` 存在，然后重新加载 Codex。以后要更新源码安装版本时，在克隆的仓库中运行 `git pull`，再重复执行复制命令即可。HyperFrames 会为每个生成的项目固定 CLI 版本，保证后续预览和渲染命令可复现。
+确认每个已安装的 Skill 都有 `<skills-directory>/<skill-name>/SKILL.md` 文件，然后重新加载 Codex。以后要更新源码安装版本时，在克隆的仓库中运行 `git pull`，再重复执行复制命令即可。HyperFrames 会为每个生成的项目固定 CLI 版本，保证后续预览和渲染命令可复现。
 
 ## 使用方法
+
+### Waynex 查询
+
+在 [API 接入页面](https://waynex.lincolab.com/api-access)登录并创建个人 API Key，然后在运行该 Skill 的终端或 Agent 进程环境中配置：
+
+PowerShell：
+
+```powershell
+$env:WAYNEX_API_KEY = "<your-api-key>"
+```
+
+Bash：
+
+```bash
+export WAYNEX_API_KEY="<your-api-key>"
+```
+
+在本地替换占位符，密钥不要发到聊天中、写入源文件或提交到版本库。Agent 进程需要继承该环境变量。配置后即可提问：
+
+```text
+使用 $waynex-query 查询未来七天广州高校的宣讲会，显示来源链接和结果总数。
+```
+
+筛选、统计、排序与分页由服务端执行。支持的参数、调用额度及测试或本地接口配置见 [API 参考](waynex-query/references/api.md)。
+
+### 媒体制作 Skills
 
 示例请求：
 
@@ -229,7 +278,13 @@ python -m compileall -q material-to-video
 python -m unittest discover -s tests -v
 ```
 
-CI 会在 Windows 和 Ubuntu 上，使用 Python 3.10 与 3.12 运行相同的检查。VoxCPM 在线调用和完整的 HyperFrames 渲染依赖外部服务，因此有意不纳入仓库 CI。
+使用 Node.js 20 或更高版本运行 Waynex 查询脚本的测试：
+
+```bash
+node --test waynex-query/tests/query.test.mjs
+```
+
+查询测试使用模拟响应，无需 API Key 或在线服务。CI 会在 Windows 和 Ubuntu 上，使用 Python 3.10 与 3.12 运行 Python 检查。VoxCPM 在线调用和完整的 HyperFrames 渲染依赖外部服务，因此有意不纳入仓库 CI。
 
 ## 安全与隐私
 
