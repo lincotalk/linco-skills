@@ -1,0 +1,4 @@
+interface:
+  display_name: "Waynex 招聘与校园活动查询"
+  short_description: "使用个人 API Key 搜索招聘和校园活动，支持多条件筛选、翻页与来源详情"
+  default_prompt: "使用 $waynex-query 查询未来七天广州高校的宣讲会。"
